@@ -1,0 +1,30 @@
+
+//调用外部函数形成DRL文件
+package com.xikang.ruleengine.test.Pune2;
+
+ // list any import classes here.
+import com.xikang.ruleengine.test.ItemCity;
+import java.math.BigDecimal;
+import com.xikang.ruleengine.test.HelloCity;
+
+//declare any global variables here
+
+dialect "java"
+
+rule "Pune Medicine Item"
+when
+    item : ItemCity(purchaseCity == ItemCity.City.PUNE, typeofItem == ItemCity.Type.MEDICINES)
+then
+    BigDecimal tax = new BigDecimal(0.0);
+    item.setLocalTax(tax.multiply(item.getSellPrice()));
+    HelloCity.writeHello(item.getPurchaseCity().toString());
+end
+
+
+rule "Pune Groceries Item"
+when
+    item : ItemCity(purchaseCity == ItemCity.City.PUNE, typeofItem == ItemCity.Type.GROCERIES)
+then
+    BigDecimal tax = new BigDecimal(2.0);
+    item.setLocalTax(tax.multiply(item.getSellPrice()));
+end

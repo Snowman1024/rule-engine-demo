@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: easyrule-engine-demo
+
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  profiles:
+    active: dev
+
+
+
+
+
+
+

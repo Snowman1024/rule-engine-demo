@@ -1,0 +1,35 @@
+package com.xikang.ruleengine.test;
+import com.xikang.ruleengine.drools.PatientInfo
+import com.alibaba.fastjson.JSON;
+
+dialect "java"
+
+//血压-偏低
+rule "rule_blood_pressure_01"
+    //控制当前的规则只会被执行一次
+    lock-on-active true
+    //优先级，数值越大越先执行
+    //salience
+
+when
+    item : PatientInfo()
+then
+    if(item.getSbp()<=100 || item.getDbp()<=70){
+        String result = "001";
+        item.setCaseCode(result);
+    }
+end
+
+//血压-正常
+rule "rule_blood_pressure_02"
+when
+    item : PatientInfo()
+then
+    if((item.getSbp()>100 && item.getSbp()<=120) ||(item.getDbp()>70 && item.getDbp()<=90)){
+         String result = "002";
+         item.setCaseCode(result);
+    }
+end
+
+
+
